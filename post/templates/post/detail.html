@@ -1,0 +1,32 @@
+{% extends 'post/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="container">
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ posts.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ posts.date_created }}</h6>
+                <p class="card-text">{{ posts.content }}</p>
+                <a href="{% url 'post:comment' posts.id %}" class="card-link">Comment</a>
+                <a href="{% url 'post:update' posts.id %}" class="card-link">Update</a>
+            </div>
+            </div>
+        </div>
+    </div>
+    {% for comment in posts.comments.all %}
+    <div class="row">
+        <div class="container">
+            <div class="card">
+            <div class="card-body">
+                <h6 class="card-subtitle mb-1 text-muted"><small>{{ comment.date_created }}</small></h6>
+                <p class="card-text"><small>{{ comment.content }}</small></p>
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
